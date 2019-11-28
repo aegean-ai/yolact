@@ -15,13 +15,23 @@ from backbone import construct_backbone
 import torch.backends.cudnn as cudnn
 from utils import timer
 from utils.functions import MovingAverage
+import os
 
 # This is required for Pytorch 1.0.1 on Windows to initialize Cuda on some driver versions.
 # See the bug report here: https://github.com/pytorch/pytorch/issues/17108
+os.environ["CUDA_VISIBLE_DEVICES"]="0"
+
+CUDA_VISIBLE_DEVICES = 0
 torch.cuda.current_device()
+print('torch.cuda.get_device_name(0)')
+print(torch.cuda.get_device_name(0))
+# print(torch.cuda.get_device_name(1))
 
 # As of March 10, 2019, Pytorch DataParallel still doesn't support JIT Script Modules
 use_jit = torch.cuda.device_count() <= 1
+print("use_jit: ", use_jit)
+use_jit = True
+print("use_jit: ", use_jit)
 if not use_jit:
     print('Multiple GPUs detected! Turning off JIT.')
 

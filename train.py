@@ -23,6 +23,14 @@ from layers.modules import MultiBoxLoss
 # Oof
 import eval as eval_script
 
+import os
+
+# os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"
+
+os.environ["CUDA_VISIBLE_DEVICES"]="0"
+
+# CUDA_VISIBLE_DEVICES = 0
+
 
 def str2bool(v):
     return v.lower() in ("yes", "true", "t", "1")
@@ -182,6 +190,9 @@ def train():
         cudnn.benchmark = True
         net = nn.DataParallel(net).cuda()
         criterion = nn.DataParallel(criterion).cuda()
+        # net = net.cuda()
+        # criterion = criterion.cuda()
+        # criterion = criterion.cuda()
 
     # loss counters
     loc_loss = 0
@@ -282,7 +293,7 @@ def train():
                 if iteration != args.start_iter:
                     time_avg.add(elapsed)
 
-                if iteration % 10 == 0:
+                if iteration % 100 == 0:
                     eta_str = \
                     str(datetime.timedelta(seconds=(cfg.max_iter - iteration) * time_avg.get_avg())).split('.')[0]
 

@@ -127,11 +127,11 @@ dataset_base = Config({
 sidewalk_dataset = dataset_base.copy({
     'name': 'sidewalk_Dataset',
 
-    'train_images': 'D:\\sidewalk\\yolact\\data\\train\\sidewalk_train_data',
-    'train_info':   'D:\\sidewalk\\yolact\\data\\train\\sidewalk_annotations\\sidewalk.json',
+    'train_images': r'L:\NewYorkCity_sidewalks\COCO\Train256_10_1234\Images',
+    'train_info':   r'L:\NewYorkCity_sidewalks\COCO\Train256_10_1234\sidewalk_train.json',
 
-    'valid_images': 'D:\\sidewalk\\yolact\\data\\val\\images',
-    'valid_info':   'D:\\sidewalk\\yolact\\data\\val\\label\\sidewalk_val.json',
+    'valid_images': r'L:\NewYorkCity_sidewalks\COCO\val256_1234\images',
+    'valid_info':   r'L:\NewYorkCity_sidewalks\COCO\val256_1234\sidewalk_val.json',
 
     'has_gt': True,
     'class_names': ('sidewalk')
@@ -381,7 +381,7 @@ coco_base_config = Config({
 
     # For each lr step, what to multiply the lr with
     'gamma': 0.1,
-    'lr_steps': (280000, 360000, 400000),
+    'lr_steps': (50000, 60000, 70000, 75000),
 
     # Initial learning rate to linearly warmup from (if until > 0)
     'lr_warmup_init': 1e-4,
@@ -574,8 +574,8 @@ yolact_base_config = coco_base_config.copy({
     'max_size': 550,
 
     # Training params
-    'lr_steps': (280000, 600000, 700000, 750000),
-    'max_iter': 800000,
+    'lr_steps': (50000, 60000, 70000, 75000),
+    'max_iter': 80000,
 
     # Backbone Settings
     'backbone': resnet101_backbone.copy({

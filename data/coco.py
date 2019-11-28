@@ -176,7 +176,7 @@ class COCODetection(data.Dataset):
         '''
         img_id = self.ids[index]
         path = self.coco.loadImgs(img_id)[0]['file_name']
-        return cv2.imread(osp.join(self.root, path), cv2.IMREAD_COLOR)
+        return cv2.imread(osp.join(self.root, path), cv2.IMREAD_COLOR) # IMREAD_LOAD_GDAL
 
     def pull_anno(self, index):
         '''Returns the original annotation of image at index

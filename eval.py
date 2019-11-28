@@ -25,9 +25,10 @@ from collections import defaultdict
 from pathlib import Path
 from collections import OrderedDict
 from PIL import Image
-
+from natsort import natsorted
 import matplotlib.pyplot as plt
 import cv2
+
 
 def str2bool(v):
     if v.lower() in ('yes', 'true', 't', 'y', '1'):
@@ -582,14 +583,22 @@ def evalimages(net:Yolact, input_folder:str, output_folder:str):
         os.mkdir(output_folder)
 
     print()
-    for p in Path(input_folder).glob('*'): 
-        path = str(p)
-        name = os.path.basename(path)
-        name = '.'.join(name.split('.')[:-1]) + '.png'
-        out_path = os.path.join(output_folder, name)
+    for p in natsorted(Path(input_folder).glob('*')):
 
-        evalimage(net, path, out_path)
-        print(path + ' -> ' + out_path)
+        # print(p)
+        path = str(p)
+        try:
+            if path[-4:].lower() == '.tfw':
+                continue
+            name = os.path.basename(path)
+            name = '.'.join(name.split('.')[:-1]) + '.png'
+            out_path = os.path.join(output_folder, name)
+
+            evalimage(net, path, out_path)
+            print(path + ' -> ' + out_path)
+        except Exception as e:
+            print("Error in evalimages():", e, path)
+            continue
     print('Done.')
 
 from multiprocessing.pool import ThreadPool
@@ -800,7 +809,8 @@ def evaluate(net:Yolact, dataset, train_mode=False):
             evalimage(net, args.image)
         return
     elif args.images is not None:
-        inp, out = args.images.split(':')
+        inp, out = args.images.split('->')
+        print('inp, out:', inp, out)
         evalimages(net, inp, out)
         return
     elif args.video is not None:
