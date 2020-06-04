@@ -276,8 +276,8 @@ def train():
                 losses = {k: v.mean() for k, v in losses.items()}  # Mean here because Dataparallel
 
                #  original
-                # loss = sum([losses[k] for k in losses])
-                loss = sum([losses[k] for k in losses]) + losses['S'] * 10  # Huan
+                loss = sum([losses[k] for k in losses])
+                # loss = sum([losses[k] for k in losses]) + losses['S'] * 10  # Huan
 
                 # Backprop
                 loss.backward()  # Do this to free up vram even if loss is not finite

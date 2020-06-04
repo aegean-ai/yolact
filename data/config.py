@@ -407,7 +407,7 @@ coco_base_config = Config({
     'mask_proto_prototype_activation': activation_func.relu,
     'mask_proto_mask_activation': activation_func.sigmoid,
     'mask_proto_coeff_activation': activation_func.tanh,
-    'mask_proto_crop': True,
+    'mask_proto_crop': False,
     'mask_proto_crop_expand': 0,
     'mask_proto_loss': None,
     'mask_proto_binarize_downsampled_gt': True,
@@ -432,7 +432,7 @@ coco_base_config = Config({
     # Have a chance to scale down the image and pad (to emulate smaller detections)
     'augment_expand': True,
     # Potentialy sample a random crop from the image and put it in a random place
-    'augment_random_sample_crop': True,
+    'augment_random_sample_crop': False,
     # Mirror the image with a probability of 1/2
     'augment_random_mirror': True,
     # Flip the image vertically with a probability of 1/2

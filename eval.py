@@ -92,7 +92,7 @@ def parse_args(argv=None):
                         help='The seed to pass into random.seed. Note: this is only really for the shuffle and does not (I think) affect cuda stuff.')
     parser.add_argument('--mask_proto_debug', default=False, dest='mask_proto_debug', action='store_true',
                         help='Outputs stuff for scripts/compute_mask.py.')
-    parser.add_argument('--no_crop', default=False, dest='crop', action='store_false',
+    parser.add_argument('--no_crop', default=True, dest='crop', action='store_false',
                         help='Do not crop output masks with the predicted bounding box.')
     parser.add_argument('--image', default=None, type=str,
                         help='A path to an image to use for display.')
@@ -102,7 +102,7 @@ def parse_args(argv=None):
                         help='A path to a video to evaluate on. Passing in a number will use that index webcam.')
     parser.add_argument('--video_multiframe', default=1, type=int,
                         help='The number of frames to evaluate in parallel to make videos play at higher fps.')
-    parser.add_argument('--score_threshold', default=0, type=float,
+    parser.add_argument('--score_threshold', default=0.001, type=float,
                         help='Detections with a score under this threshold will not be considered. This currently only works in display mode.')
     parser.add_argument('--dataset', default=None, type=str,
                         help='If specified, override the dataset specified in the config with this one (example: coco2017_dataset).')
