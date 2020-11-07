@@ -48,7 +48,7 @@ parser.add_argument('--start_iter', default=0, type=int,
                          'determined from the file name.')
 parser.add_argument('--num_workers', default=4, type=int,
                     help='Number of workers used in data loading')
-parser.add_argument('--cuda', default=False, type=str2bool,
+parser.add_argument('--cuda', default=True, type=str2bool,
                     help='Use CUDA to train model')
 parser.add_argument('--lr', '--learning_rate', default=None, type=float,
                     help='Initial learning rate. Leave as None to read this from the config.')
